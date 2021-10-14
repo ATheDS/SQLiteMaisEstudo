@@ -1,9 +1,13 @@
 package com.example.sqlitemaisestudo;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +27,7 @@ public class MateriasFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Banco db = new Banco(getActivity());
 
     public MateriasFragment() {
         // Required empty public constructor
@@ -59,6 +64,20 @@ public class MateriasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        try {
+            SQLiteDatabase banco = SQLiteDatabase.openOrCreateDatabase("banco",null);
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+
+        }
+        db.addUser(new User("arra","ara@qaa",23,"tader",123));
+        Log.d("a","asd");
+
+
         return inflater.inflate(R.layout.fragment_materias, container, false);
     }
 }

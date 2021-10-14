@@ -45,9 +45,9 @@ public class HomeActivity extends AppCompatActivity {
         AgendaFragment afragment = new AgendaFragment();
         PerfilFragment pfragment = new PerfilFragment();
 
-        adapter.addFragment(mfragment,"Materias");
-        adapter.addFragment(afragment,"Agenda");
         adapter.addFragment(pfragment,"Perfil");
+        adapter.addFragment(afragment,"Agenda");
+        adapter.addFragment(mfragment,"Materias");
 
         viewPager.setAdapter(adapter);
 

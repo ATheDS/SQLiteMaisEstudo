@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     public List AdmList;
     public User User;
+    private SQLiteDatabase banco;
     String[] mensagens = {"Preencha todos os campos", "Credenciais Inválidas"};
 
 
@@ -37,6 +39,13 @@ public class LoginActivity extends AppCompatActivity {
         AdmList.add("rafaeldinizsoaresreal@gmail.com");
         AdmList.add("diniz@arcom.com");
         AdmList.add("alyssom@arcom.com");
+        try{
+            SQLiteDatabase banco = openOrCreateDatabase("banco",MODE_PRIVATE,null);
+            banco.execSQL("CREATE TABLE IF NOT EXISTS USUARIOS(id INT,nome VARCHAR,email VARCHAR,cursos INT(3),turno VARCHAR)");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         IniciarComponentes();
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +117,8 @@ public class LoginActivity extends AppCompatActivity {
 
         intent.putExtra("aList", (Serializable) AdmList);
         intent.putExtra("Users", (Serializable) User);
+
+
 
         startActivity(intent);
 

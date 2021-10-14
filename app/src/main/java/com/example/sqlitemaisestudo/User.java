@@ -7,72 +7,33 @@ import java.io.Serializable;
 public class User implements Serializable {
     public String email;
     public String nome;
-    public String uid;
+    public int uid;
     public Integer cursos;
-    public String turno;
-    public Integer atividades;
 
-    public Integer getAtividades() {
-        return atividades;
-    }
-    public void IncrementarAtividades(int i){
-        this.atividades = atividades+i;
+
+    public User(){
     }
 
-    public void setAtividades(Integer atividades) {
-        this.atividades = atividades;
-    }
 
-    public User(Integer atividades) {
-        this.atividades = atividades;
-    }
 
-    public Button getBotaomais() {
-        return botaomais;
-    }
-
-    public void setBotaomais(Button botaomais) {
-        this.botaomais = botaomais;
-    }
-
-    public Button getBotaomenos() {
-        return botaomenos;
-    }
-
-    public void setBotaomenos(Button botaomenos) {
-        this.botaomenos = botaomenos;
-    }
-
-    public Button botaomais;
-    public Button botaomenos;
-
-    public String getTurno() {
-        return turno;
-    }
-
-    public User(Button botaomais, Button botaomenos) {
-        this.botaomais = botaomais;
-        this.botaomenos = botaomenos;
-    }
-
-    public void setTurno(String turno) {
-        this.turno = turno;
-    }
-
-    public User(String email, String nome, String uid, Integer cursos) {
+    public User(int uid,String email, String nome, Integer cursos, String turno, Integer atividades) {
         this.email = email;
         this.nome = nome;
         this.uid = uid;
         this.cursos = cursos;
+        this.turno = turno;
+        this.atividades = atividades;
+    }
+    public User(String email, String nome, Integer cursos, String turno, Integer atividades) {
+        this.email = email;
+        this.nome = nome;
+        this.cursos = cursos;
+        this.turno = turno;
+        this.atividades = atividades;
     }
 
-    public User() {
-
-    }
-
-    public Integer getCursos() {
-        return cursos;
-    }
+    public String turno;
+    public Integer atividades;
 
     public String getEmail() {
         return email;
@@ -82,24 +43,45 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getName() {
+    public String getNome() {
         return nome;
     }
 
-    public void setName(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public Integer getCursos() {
+        return cursos;
     }
 
     public void setCursos(Integer cursos) {
         this.cursos = cursos;
     }
-}
 
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public Integer getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(Integer atividades) {
+        this.atividades = atividades;
+    }
+
+
+}

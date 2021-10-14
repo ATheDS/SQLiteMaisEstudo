@@ -80,6 +80,6 @@ public class PerfilFragment extends Fragment {
             startActivity(intent);
 
         });
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        return view;
     }
 }
