@@ -41,26 +41,17 @@ public class LoginActivity extends AppCompatActivity {
         AdmList.add("rafaeldinizsoaresreal@gmail.com");
         AdmList.add("diniz@arcom.com");
         AdmList.add("alyssom@arcom.com");
-        try{
-            SQLiteDatabase banco = openOrCreateDatabase("banco",MODE_PRIVATE,null);
-            banco.execSQL("CREATE TABLE IF NOT EXISTS USUARIOS(id INT,nome VARCHAR,email VARCHAR,cursos INT(3),turno VARCHAR)");
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         IniciarComponentes();
-        try {
-            SQLiteDatabase banco = SQLiteDatabase.openOrCreateDatabase("banco",null);
 
 
-        }
-        catch (Exception e){
-            e.printStackTrace();
+        db.addUser(new User("ara@qaa","oro",23,"tader",123));
 
-
-        }
-        db.addUser(new User("arra","ara@qaa",23,"tader",123));
+        db.addUser(new User("ara@qa","mato",23,"tader",123));
         Log.d("a","asd");
+        Log.d("a",db.selecionarUser(3).toString());
+
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

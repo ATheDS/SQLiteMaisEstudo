@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +28,7 @@ public class MateriasFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    Banco db;
 
     public MateriasFragment() {
         // Required empty public constructor
@@ -62,7 +64,20 @@ public class MateriasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = getActivity().getIntent().getExtras();
+        Button editarmaterias = getActivity().findViewById(R.id.editarmaterias);
+        editarmaterias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+
         // Inflate the layout for this fragment
+        ;
+
 
 
 

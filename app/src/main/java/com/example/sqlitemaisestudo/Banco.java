@@ -27,7 +27,7 @@ public class Banco extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE tb_users("+ COLUNA_ID +" INTERGER PRIMARY KEY, nome VARCHAR, email VARCHAR, turno VARCHAR, cursos INTEGER)");
+        db.execSQL("CREATE TABLE tb_users("+ COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , nome VARCHAR, email VARCHAR, turno VARCHAR, cursos INTEGER)");
     }
 
     @Override
@@ -48,15 +48,17 @@ public class Banco extends SQLiteOpenHelper {
 
 
     }
-    void selecionarUser(User user){
+    public User selecionarUser(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query("tb_user",new String[]{"id,nome,email,turno,cursos"},COLUNA_ID+ " = ?",new String[]{String.valueOf(user.getUid())},null,null,null,null);
+        Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","turno","cursos"},
+                COLUNA_ID+ " = ?",
+                new String[]{String.valueOf(id)},null,null,null,null);
         if(cursor !=null){
             cursor.moveToFirst();
         }
-        User user1 = new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getString(4),cursor.getInt(5));
-        return user1;
+        return new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getString(4),cursor.getInt(5));
 
     }
+
 
 }
