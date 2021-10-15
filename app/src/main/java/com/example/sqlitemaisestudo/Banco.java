@@ -2,6 +2,7 @@ package com.example.sqlitemaisestudo;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -26,9 +27,7 @@ public class Banco extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String QUERY_COLUNA = "CREATE TABLE "+ TABELA_USER + "("+ COLUNA_ID+ " INTEGER PRIMARY KEY, "+ COLUNA_NOME + " VARCHAR ,"+COLUNA_EMAIL +" VARCHAR ,"+
-                COLUNA_TURNO +" INTEGER ,"+COLUNA_TURNO+" VARCHAR)";
-        db.execSQL(QUERY_COLUNA);
+        db.execSQL("CREATE TABLE tb_users("+ COLUNA_ID +" INTERGER PRIMARY KEY, nome VARCHAR, email VARCHAR, turno VARCHAR, cursos INTEGER)");
     }
 
     @Override
@@ -49,4 +48,15 @@ public class Banco extends SQLiteOpenHelper {
 
 
     }
+    void selecionarUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query("tb_user",new String[]{"id,nome,email,turno,cursos"},COLUNA_ID+ " = ?",new String[]{String.valueOf(user.getUid())},null,null,null,null);
+        if(cursor !=null){
+            cursor.moveToFirst();
+        }
+        User user1 = new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getString(4),cursor.getInt(5));
+        return user1;
+
+    }
+
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     public List AdmList;
     public User User;
-    private SQLiteDatabase banco;
+    private Banco db = new Banco(this);
+
     String[] mensagens = {"Preencha todos os campos", "Credenciais Inválidas"};
 
 
@@ -47,6 +49,18 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         IniciarComponentes();
+        try {
+            SQLiteDatabase banco = SQLiteDatabase.openOrCreateDatabase("banco",null);
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+
+        }
+        db.addUser(new User("arra","ara@qaa",23,"tader",123));
+        Log.d("a","asd");
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

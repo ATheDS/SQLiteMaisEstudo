@@ -27,7 +27,6 @@ public class MateriasFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Banco db = new Banco(getActivity());
 
     public MateriasFragment() {
         // Required empty public constructor
@@ -64,18 +63,7 @@ public class MateriasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        try {
-            SQLiteDatabase banco = SQLiteDatabase.openOrCreateDatabase("banco",null);
 
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-
-
-        }
-        db.addUser(new User("arra","ara@qaa",23,"tader",123));
-        Log.d("a","asd");
 
 
         return inflater.inflate(R.layout.fragment_materias, container, false);
