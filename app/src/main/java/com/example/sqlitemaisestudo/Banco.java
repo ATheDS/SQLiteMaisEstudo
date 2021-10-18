@@ -19,6 +19,8 @@ public class Banco extends SQLiteOpenHelper {
     private static final String COLUNA_EMAIL = "email";
     private static final String COLUNA_TURNO = "turno";
     private static final String COLUNA_CURSOS = "cursos";
+    private static final String COLUNA_ATIVIDADES = "atividades";
+
 
 
     public Banco( Context context) {
@@ -27,7 +29,7 @@ public class Banco extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE tb_users("+ COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , nome VARCHAR, email VARCHAR, turno VARCHAR, cursos INTEGER)");
+        db.execSQL("CREATE TABLE tb_users("+ COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , nome VARCHAR, email VARCHAR,cursos INTEGER, turno VARCHAR, atividades INTEGER, UNIQUE(email,nome))");
     }
 
     @Override
@@ -36,21 +38,37 @@ public class Banco extends SQLiteOpenHelper {
 
     }
     void addUser(User user){
-
         SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","cursos","turno","atividades"},
+                COLUNA_ID+ " = ?",
+                new String[]{COLUNA_ID},null,null,null,null);
+        if(cursor !=null){
+            cursor.moveToFirst();
+        }
+
+
+
         ContentValues values = new ContentValues();
         values.put(COLUNA_NOME, user.getNome());
         values.put(COLUNA_EMAIL, user.getEmail());
         values.put(COLUNA_CURSOS, user.getCursos());
         values.put(COLUNA_TURNO, user.getTurno());
+        values.put(COLUNA_ATIVIDADES, user.getAtividades());
         db.insert(TABELA_USER,null,values);
+
+
+
+
+
+
+
         db.close();
 
 
     }
     public User selecionarUser(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","turno","cursos"},
+        Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","cursos","turno","atividades"},
                 COLUNA_ID+ " = ?",
                 new String[]{String.valueOf(id)},null,null,null,null);
         if(cursor !=null){

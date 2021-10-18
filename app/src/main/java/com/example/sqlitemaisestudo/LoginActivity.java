@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         db.addUser(new User("ara@qa","mato",23,"tader",123));
         Log.d("a","asd");
-        Log.d("a",db.selecionarUser(3).toString());
+        Log.d("a",db.selecionarUser(1).getNome().toString());
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
