@@ -32,6 +32,7 @@ public class PerfilFragment extends Fragment {
     public ImageButton editar;
     public TextView emailtext,nometext,cursotext,turnotext;
     public User user;
+    public Banco banco;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -76,9 +77,20 @@ public class PerfilFragment extends Fragment {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             getActivity().finish();
+            emailtext = view.findViewById(R.id.emailtextview);
+
 
             startActivity(intent);
 
+
+        });
+        editar = view.findViewById(R.id.editar);
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),EditarActivity.class);
+                startActivity(intent);
+            }
         });
         return view;
     }

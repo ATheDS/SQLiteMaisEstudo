@@ -29,7 +29,7 @@ public class Banco extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE tb_users("+ COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , nome VARCHAR, email VARCHAR,cursos INTEGER, turno VARCHAR, atividades INTEGER, UNIQUE(email,nome))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS tb_users("+ COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , nome VARCHAR, email VARCHAR,cursos INTEGER, turno VARCHAR, atividades INTEGER, UNIQUE(email,nome))");
     }
 
     @Override
@@ -66,6 +66,15 @@ public class Banco extends SQLiteOpenHelper {
 
 
     }
+    public int getIdbyemail(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "SELECT id FROM " + TABELA_USER + " WHERE email =  "+ email;
+        Cursor cursor = db.rawQuery(sql,null);
+
+        return Integer.parseInt(sql);
+
+    };
+
     public User selecionarUser(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","cursos","turno","atividades"},

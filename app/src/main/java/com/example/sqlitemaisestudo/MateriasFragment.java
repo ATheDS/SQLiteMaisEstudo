@@ -65,13 +65,7 @@ public class MateriasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Bundle bundle = getActivity().getIntent().getExtras();
-        Button editarmaterias = getActivity().findViewById(R.id.editarmaterias);
-        editarmaterias.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
 
 
 

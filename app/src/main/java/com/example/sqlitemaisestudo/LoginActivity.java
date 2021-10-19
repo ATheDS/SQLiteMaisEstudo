@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     public List AdmList;
     public User User;
+    int ActualID ;
     private Banco db = new Banco(this);
 
     String[] mensagens = {"Preencha todos os campos", "Credenciais Inválidas"};
@@ -45,11 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         IniciarComponentes();
 
 
-        db.addUser(new User("ara@qaa","oro",23,"tader",123));
 
-        db.addUser(new User("ara@qa","mato",23,"tader",123));
         Log.d("a","asd");
-        Log.d("a",db.selecionarUser(1).getNome().toString());
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +68,28 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                db.addUser(new User(FirebaseAuth.getInstance().getCurrentUser().getEmail(),"",0,"",0));
+                                ActualID = db.getIdbyemail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                                Toast.makeText(getApplicationContext(), String.valueOf(ActualID), Toast.LENGTH_SHORT).show();
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+                                Log.d("emailid", String.valueOf(ActualID));
+
+
 
 
 
@@ -119,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void home() {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-
         intent.putExtra("aList", (Serializable) AdmList);
         intent.putExtra("Users", (Serializable) User);
 
