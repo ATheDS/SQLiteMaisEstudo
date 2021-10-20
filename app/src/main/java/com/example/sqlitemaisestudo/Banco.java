@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class Banco extends SQLiteOpenHelper {
+import java.io.Serializable;
+
+public class Banco extends SQLiteOpenHelper implements Serializable {
 
     private static final int VERSAO_BANCO = 1;
     private static final String BANCO_USER = "bd_users";
@@ -39,41 +41,51 @@ public class Banco extends SQLiteOpenHelper {
     }
     void addUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","cursos","turno","atividades"},
-                COLUNA_ID+ " = ?",
-                new String[]{COLUNA_ID},null,null,null,null);
-        if(cursor !=null){
-            cursor.moveToFirst();
+        try{
+            Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","cursos","turno","atividades"},
+                    COLUNA_ID+ " = ?",
+                    new String[]{COLUNA_ID},null,null,null,null);
+            if(cursor !=null){
+                cursor.moveToFirst();
+            }
+
+
+
+            ContentValues values = new ContentValues();
+            values.put(COLUNA_NOME, user.getNome());
+            values.put(COLUNA_EMAIL, user.getEmail());
+            values.put(COLUNA_CURSOS, user.getCursos());
+            values.put(COLUNA_TURNO, user.getTurno());
+            values.put(COLUNA_ATIVIDADES, user.getAtividades());
+            db.insert(TABELA_USER,null,values);
+
+
+
+
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
-
-        ContentValues values = new ContentValues();
-        values.put(COLUNA_NOME, user.getNome());
-        values.put(COLUNA_EMAIL, user.getEmail());
-        values.put(COLUNA_CURSOS, user.getCursos());
-        values.put(COLUNA_TURNO, user.getTurno());
-        values.put(COLUNA_ATIVIDADES, user.getAtividades());
-        db.insert(TABELA_USER,null,values);
-
-
-
-
-
-
-
         db.close();
+
+
 
 
     }
     public int getIdbyemail(String email){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "SELECT id FROM " + TABELA_USER + " WHERE email =  "+ email;
+        String sql = "SELECT id FROM " + TABELA_USER + " WHERE email =  '"+ email+ "'";
         Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToNext();
 
-        return Integer.parseInt(sql);
+        return Integer.parseInt(String.valueOf(cursor.getString(0)));
 
     };
+
+
 
     public User selecionarUser(int id){
         SQLiteDatabase db = this.getWritableDatabase();

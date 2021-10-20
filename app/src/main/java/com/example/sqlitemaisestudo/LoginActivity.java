@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     public List AdmList;
     public User User;
     int ActualID ;
-    private Banco db = new Banco(this);
+    public Banco db;
 
     String[] mensagens = {"Preencha todos os campos", "Credenciais Inválidas"};
 
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Log.d("a","asd");
+        db = new Banco(this);
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -68,26 +70,17 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                db.addUser(new User(FirebaseAuth.getInstance().getCurrentUser().getEmail(),"",0,"",0));
+                                try{
+                                    db.addUser(new User(FirebaseAuth.getInstance().getCurrentUser().getEmail(),"",0,"",0));
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                                 ActualID = db.getIdbyemail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                                 Toast.makeText(getApplicationContext(), String.valueOf(ActualID), Toast.LENGTH_SHORT).show();
                                 Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
-                                Log.d("emailid", String.valueOf(ActualID));
+
+
 
 
 
@@ -134,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser useratual = FirebaseAuth.getInstance().getCurrentUser();
         if (useratual != null) {
+            ActualID = db.getIdbyemail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
             home();
         }
     }
@@ -142,6 +137,25 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         intent.putExtra("aList", (Serializable) AdmList);
         intent.putExtra("Users", (Serializable) User);
+        intent.putExtra("db",(Serializable) db);
+
+        intent.putExtra("IdAtual", (Serializable) ActualID);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

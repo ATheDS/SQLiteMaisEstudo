@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +32,13 @@ public class PerfilFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    Integer IdAtual;
+
     public ImageButton editar;
     public TextView emailtext,nometext,cursotext,turnotext;
     public User user;
-    public Banco banco;
+    public Banco db;
+
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -69,6 +75,16 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_perfil, container, false);
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras != null) {
+            IdAtual = extras.getInt("IdAtual");
+            db = (Banco) extras.get("users");
+
+
+            // and get whatever type user account id is
+        }
+
+        Toast.makeText(getActivity(), IdAtual.toString(), Toast.LENGTH_SHORT).show();
 
         // Inflate the layout for this fragment
 
@@ -80,10 +96,12 @@ public class PerfilFragment extends Fragment {
             emailtext = view.findViewById(R.id.emailtextview);
 
 
+
             startActivity(intent);
 
 
         });
+        emailtext.setText(db.selecionarUser(IdAtual).getEmail());
         editar = view.findViewById(R.id.editar);
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
