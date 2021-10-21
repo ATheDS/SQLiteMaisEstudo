@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import java.io.Serializable;
 
-public class Banco extends SQLiteOpenHelper implements Serializable {
+public class Banco extends SQLiteOpenHelper implements Serializable                {
 
     private static final int VERSAO_BANCO = 1;
     private static final String BANCO_USER = "bd_users";
@@ -96,6 +96,13 @@ public class Banco extends SQLiteOpenHelper implements Serializable {
             cursor.moveToFirst();
         }
         return new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getString(4),cursor.getInt(5));
+
+    }
+    public void setUserString(String var, String val, int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "UPDATE "+ TABELA_USER + " SET "+ var+" = '"+ val+"' WHERE ID = "+id;
+        Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToNext();
 
     }
 

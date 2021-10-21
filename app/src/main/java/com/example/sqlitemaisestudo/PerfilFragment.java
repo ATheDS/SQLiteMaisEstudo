@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -78,11 +79,20 @@ public class PerfilFragment extends Fragment {
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null) {
             IdAtual = extras.getInt("IdAtual");
-            db = (Banco) extras.get("users");
+            db = ((MaisEstudoApplication) getActivity().getApplication()).getDb();
 
 
             // and get whatever type user account id is
         }
+        emailtext = view.findViewById(R.id.emailtextview);
+        nometext = view.findViewById(R.id.nometextview);
+        turnotext = view.findViewById(R.id.turnotextview);
+        cursotext = view.findViewById(R.id.cursostextview);
+
+        emailtext.setText(db.selecionarUser(IdAtual).getEmail());
+        turnotext.setText(db.selecionarUser(IdAtual).getTurno());
+        nometext.setText(db.selecionarUser(IdAtual).getNome());
+        cursotext.setText(db.selecionarUser(IdAtual).getCursos().toString());
 
         Toast.makeText(getActivity(), IdAtual.toString(), Toast.LENGTH_SHORT).show();
 
@@ -92,8 +102,10 @@ public class PerfilFragment extends Fragment {
         deslogar.setOnClickListener(view2 -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
+
             getActivity().finish();
-            emailtext = view.findViewById(R.id.emailtextview);
+
+
 
 
 
@@ -101,12 +113,13 @@ public class PerfilFragment extends Fragment {
 
 
         });
-        emailtext.setText(db.selecionarUser(IdAtual).getEmail());
         editar = view.findViewById(R.id.editar);
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),EditarActivity.class);
+                intent.putExtra("IdAtual", (Serializable) IdAtual);
+
                 startActivity(intent);
             }
         });
