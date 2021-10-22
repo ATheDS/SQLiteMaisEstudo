@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditarActivity extends AppCompatActivity {
     public EditText nometext,cursotext,turnotext;
@@ -38,6 +39,10 @@ public class EditarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db.setUserString("turno",turnotext.getText().toString(),IdAtual);
+                db.setUserString("nome",nometext.getText().toString(),IdAtual);
+                db.setUserInt("cursos",Integer.parseInt(cursotext.getText().toString()),IdAtual);
+
+
                 Intent intent = new Intent(EditarActivity.this,HomeActivity.class);
                 intent.putExtra("IdAtual",IdAtual);
                 startActivity(intent);

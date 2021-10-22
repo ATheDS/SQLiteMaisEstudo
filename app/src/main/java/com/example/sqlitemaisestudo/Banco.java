@@ -105,6 +105,13 @@ public class Banco extends SQLiteOpenHelper implements Serializable             
         cursor.moveToNext();
 
     }
+    public void setUserInt(String var, int val, int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "UPDATE "+ TABELA_USER + " SET "+ var+" = '"+ val+"' WHERE ID = "+id;
+        Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToNext();
+
+    }
 
 
 }
