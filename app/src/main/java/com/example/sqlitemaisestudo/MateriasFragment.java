@@ -2,6 +2,7 @@ package com.example.sqlitemaisestudo;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -29,6 +30,8 @@ public class MateriasFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     Banco db;
+    public Button editar;
+    public int IdAtual;
 
     public MateriasFragment() {
         // Required empty public constructor
@@ -65,6 +68,20 @@ public class MateriasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Bundle bundle = getActivity().getIntent().getExtras();
+        if (bundle != null) {
+            IdAtual = bundle.getInt("IdAtual");
+        }
+        View view = inflater.inflate(R.layout.fragment_materias, container, false);
+        editar = view.findViewById(R.id.editarmaterias);
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),EditarMateriasActivity.class);
+                intent.putExtra("IdAtual",IdAtual);
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -75,6 +92,6 @@ public class MateriasFragment extends Fragment {
 
 
 
-        return inflater.inflate(R.layout.fragment_materias, container, false);
+        return view;
     }
 }

@@ -31,7 +31,7 @@ public class Banco extends SQLiteOpenHelper implements Serializable             
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS tb_users("+ COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , nome VARCHAR, email VARCHAR,cursos INTEGER, turno VARCHAR, atividades INTEGER, UNIQUE(email,nome))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS tb_users("+ COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , nome VARCHAR, email VARCHAR,cursos INTEGER, turno VARCHAR, atividades INTEGER, UNIQUE(email))");
     }
 
     @Override
@@ -41,6 +41,8 @@ public class Banco extends SQLiteOpenHelper implements Serializable             
     }
     void addUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
+
+
         try{
             Cursor cursor = db.query("tb_users",new String[]{COLUNA_ID,"email","nome","cursos","turno","atividades"},
                     COLUNA_ID+ " = ?",
@@ -110,6 +112,25 @@ public class Banco extends SQLiteOpenHelper implements Serializable             
         String sql = "UPDATE "+ TABELA_USER + " SET "+ var+" = '"+ val+"' WHERE ID = "+id;
         Cursor cursor = db.rawQuery(sql,null);
         cursor.moveToNext();
+
+    }
+    public int getDbSize(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "SELECT id FROM tb_users ORDER BY id DESC LIMIT 1";
+        Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToNext();
+
+        return cursor.getInt(0);
+
+
+    }
+    public String getAllUserData(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "SELECT * FROM " + TABELA_USER + " WHERE id =  "+ id;
+        Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToNext();
+
+        return new String(cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3)+" "+cursor.getString(4)+" "+cursor.getString(5));
 
     }
 
