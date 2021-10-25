@@ -133,6 +133,17 @@ public class Banco extends SQLiteOpenHelper implements Serializable             
         return new String(cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3)+" "+cursor.getString(4)+" "+cursor.getString(5));
 
     }
+    public Cursor viewData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "SELECT * FROM "+ TABELA_USER;
+        Cursor cursor = db.rawQuery(sql,null);
+        return  cursor;
+    }
+
+
+
+
+
 
 
 }

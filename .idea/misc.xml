@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/diniz/StudioProjects/SQLiteMaisEstudo/app/src/main/res/layout/activity_editar_materias.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/diniz/StudioProjects/SQLiteMaisEstudo/app/src/main/res/layout/row_users.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/rafael.soares/AndroidStudioProjects/SQLiteMaisEstudo/app/src/main/res/drawable/card.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/rafael.soares/AndroidStudioProjects/SQLiteMaisEstudo/app/src/main/res/drawable/gradient_blue_2.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/rafael.soares/AndroidStudioProjects/SQLiteMaisEstudo/app/src/main/res/drawable/gradoent_blue_1.xml" value="0.15885416666666666" />
@@ -15,11 +17,9 @@
         <entry key="..\:/Users/rafael.soares/AndroidStudioProjects/SQLiteMaisEstudo/app/src/main/res/layout/fragment_materias.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/rafael.soares/AndroidStudioProjects/SQLiteMaisEstudo/app/src/main/res/layout/fragment_perfil.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/rafael.soares/Desktop/teste/app/src/main/res/layout/activity_editar.xml" value="0.25" />
-        <entry key="..\:/Users/rafael.soares/Desktop/teste/app/src/main/res/layout/activity_editar_materias.xml" value="0.1" />
         <entry key="..\:/Users/rafael.soares/Desktop/teste/app/src/main/res/layout/activity_tabela_users.xml" value="0.11510416666666666" />
         <entry key="..\:/Users/rafael.soares/Desktop/teste/app/src/main/res/layout/fragment_materias.xml" value="0.1" />
         <entry key="..\:/Users/rafael.soares/Desktop/teste/app/src/main/res/layout/fragment_perfil.xml" value="0.10625" />
-        <entry key="..\:/Users/rafael.soares/Desktop/teste/app/src/main/res/layout/row_users.xml" value="0.1" />
       </map>
     </option>
   </component>
